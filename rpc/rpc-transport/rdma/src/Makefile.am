@@ -1,7 +1,7 @@
 # TODO : need to change transportdir
 
 transport_LTLIBRARIES = rdma.la
-transportdir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/rpc-transport
+transportdir = $(libdir)/glusterfs/rpc-transport
 
 rdma_la_LDFLAGS = -module -avoid-version -nostartfiles
 

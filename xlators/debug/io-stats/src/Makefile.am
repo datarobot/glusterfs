@@ -1,6 +1,6 @@
 
 xlator_LTLIBRARIES = io-stats.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/debug
+xlatordir = $(libdir)/glusterfs/xlator/debug
 
 io_stats_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

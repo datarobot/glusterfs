@@ -1,5 +1,5 @@
 auth_LTLIBRARIES = addr.la
-authdir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/auth
+authdir = $(libdir)/glusterfs/auth
 
 addr_la_LDFLAGS = -module -avoid-version
 

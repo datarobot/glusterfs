@@ -1,6 +1,6 @@
 xlator_LTLIBRARIES = read-only.la worm.la
 
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 
 noinst_HEADERS = read-only.h read-only-mem-types.h read-only-common.h worm-helper.h
 

@@ -15,7 +15,7 @@ else
 endif
 
 xlator_LTLIBRARIES = fuse.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/mount
+xlatordir = $(libdir)/glusterfs/xlator/mount
 
 if GF_DARWIN_HOST_OS
     mount_source=$(CONTRIBDIR)/macfuse/mount_darwin.c

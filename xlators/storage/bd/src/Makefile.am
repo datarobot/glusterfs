@@ -1,6 +1,6 @@
 if ENABLE_BD_XLATOR
 xlator_LTLIBRARIES = bd.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/storage
+xlatordir = $(libdir)/glusterfs/xlator/storage
 
 bd_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 LIBBD = -llvm2app -lrt

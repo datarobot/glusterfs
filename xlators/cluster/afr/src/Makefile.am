@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = afr.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/cluster
+xlatordir = $(libdir)/glusterfs/xlator/cluster
 
 afr_common_source = afr-dir-read.c afr-dir-write.c afr-inode-read.c \
 	afr-inode-write.c afr-open.c afr-transaction.c afr-lk-common.c \

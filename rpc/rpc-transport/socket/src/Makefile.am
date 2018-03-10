@@ -1,7 +1,7 @@
 noinst_HEADERS = socket.h name.h socket-mem-types.h
 
 rpctransport_LTLIBRARIES = socket.la
-rpctransportdir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/rpc-transport
+rpctransportdir = $(libdir)/glusterfs/rpc-transport
 
 socket_la_LDFLAGS = -module -avoid-version
 

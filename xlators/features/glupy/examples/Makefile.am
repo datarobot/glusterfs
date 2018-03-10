@@ -1,4 +1,4 @@
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 
 glupyexamplesdir = $(xlatordir)/glupy
 

@@ -1,6 +1,6 @@
 
 xlator_LTLIBRARIES = error-gen.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/debug
+xlatordir = $(libdir)/glusterfs/xlator/debug
 
 error_gen_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

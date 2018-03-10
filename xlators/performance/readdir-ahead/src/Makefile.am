@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = readdir-ahead.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance
+xlatordir = $(libdir)/glusterfs/xlator/performance
 
 readdir_ahead_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

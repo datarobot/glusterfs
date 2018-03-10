@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = ec.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/cluster
+xlatordir = $(libdir)/glusterfs/xlator/cluster
 
 ec_sources := ec.c
 ec_sources += ec-data.c

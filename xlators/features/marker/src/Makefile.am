@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = marker.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 
 marker_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

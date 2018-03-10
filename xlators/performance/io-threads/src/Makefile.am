@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = io-threads.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance
+xlatordir = $(libdir)/glusterfs/xlator/performance
 
 io_threads_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

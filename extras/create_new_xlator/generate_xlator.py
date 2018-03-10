@@ -10,7 +10,7 @@ from generator import ops, xlator_cbks, xlator_dumpops
 
 MAKEFILE_FMT = """
 xlator_LTLIBRARIES = @XL_NAME@.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/@XL_TYPE@
+xlatordir = $(libdir)/glusterfs/xlator/@XL_TYPE@
 @XL_NAME_NO_HYPHEN@_la_LDFLAGS = -module -avoid-version
 @XL_NAME_NO_HYPHEN@_la_SOURCES = @XL_NAME@.c
 @XL_NAME_NO_HYPHEN@_la_LIBADD = $(top_builddir)/libglusterfs/src/libglusterfs.la
