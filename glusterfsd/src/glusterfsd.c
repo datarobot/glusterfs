@@ -1728,8 +1728,8 @@ print_exports_file (const char *exports_file)
         void (*exp_file_print)(const struct exports_file *file) = NULL;
         void (*exp_file_deinit)(struct exports_file *ptr) = NULL;
 
-        /* XLATORDIR passed through a -D flag to GCC */
-        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDIR,
+        /* XLATORDEFAULTDIR passed through a -D flag to GCC */
+        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDEFAULTDIR,
                            "nfs");
         if (ret < 0) {
                 gf_log ("glusterfs", GF_LOG_CRITICAL, "asprintf () failed.");
@@ -1824,8 +1824,8 @@ print_netgroups_file (const char *netgroups_file)
         void         (*ng_file_print)(const struct netgroups_file *file) = NULL;
         void         (*ng_file_deinit)(struct netgroups_file *ptr) = NULL;
 
-        /* XLATORDIR passed through a -D flag to GCC */
-        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDIR,
+        /* XLATORDEFAULTDIR passed through a -D flag to GCC */
+        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDEFAULTDIR,
                         "nfs");
         if (ret < 0) {
                 gf_log ("glusterfs", GF_LOG_CRITICAL, "asprintf () failed.");

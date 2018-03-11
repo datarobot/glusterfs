@@ -145,7 +145,7 @@ xlator_volopt_dynload (char *xlator_type, void **dl_handle,
         /* socket.so doesn't fall under the default xlator directory, hence we
          * need this check */
         if (!strstr(xlator_type, "rpc-transport"))
-                ret = gf_asprintf (&name, "%s/%s.so", XLATORDIR, xlator_type);
+                ret = gf_asprintf (&name, "%s/%s.so", XLATORDEFAULTDIR, xlator_type);
         else
                 ret = gf_asprintf (&name, "%s/%s.so", XLATORPARENTDIR, xlator_type);
         if (-1 == ret) {
@@ -198,7 +198,7 @@ xlator_dynload (xlator_t *xl)
 
         INIT_LIST_HEAD (&xl->volume_options);
 
-        ret = gf_asprintf (&name, "%s/%s.so", XLATORDIR, xl->type);
+        ret = gf_asprintf (&name, "%s/%s.so", XLATORDEFAULTDIR, xl->type);
         if (-1 == ret) {
                 goto out;
         }
