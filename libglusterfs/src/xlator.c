@@ -190,15 +190,26 @@ xlator_dynload (xlator_t *xl)
 {
         int                ret = -1;
         char              *name = NULL;
+        char              *xlator_dir = NULL;
         void              *handle = NULL;
         volume_opt_list_t *vol_opt = NULL;
         class_methods_t   *vtbl = NULL;
+        glusterfs_ctx_t   *ctx = NULL;
 
         GF_VALIDATE_OR_GOTO ("xlator", xl, out);
 
         INIT_LIST_HEAD (&xl->volume_options);
 
-        ret = gf_asprintf (&name, "%s/%s.so", XLATORDEFAULTDIR, xl->type);
+        ctx = xl->ctx;
+        if (ctx) {
+            xlator_dir = ctx->cmd_args.xlator_dir;
+        }
+
+        if (!xlator_dir) {
+            xlator_dir = XLATORDEFAULTDIR;
+        }
+
+        ret = gf_asprintf (&name, "%s/%s.so", xlator_dir, xl->type);
         if (-1 == ret) {
                 goto out;
         }
