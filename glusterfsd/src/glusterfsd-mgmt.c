@@ -847,7 +847,8 @@ glusterfs_handle_attach (rpcsvc_request_t *req)
                 gf_log (this->name, GF_LOG_INFO,
                         "got attach for %s", xlator_req.name);
                 ret = glusterfs_graph_attach (this->ctx->active,
-                                              xlator_req.name, &newgraph);
+                                              xlator_req.name, &newgraph,
+                                              this->ctx);
                 if (ret == 0) {
                         ret = glusterfs_graph_parent_up (newgraph);
                         if (ret) {

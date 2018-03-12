@@ -52,7 +52,7 @@ glfs_process_volfp (struct glfs *fs, FILE *fp)
 	glusterfs_ctx_t	   *ctx = NULL;
 
 	ctx = fs->ctx;
-	graph = glusterfs_graph_construct (fp);
+	graph = glusterfs_graph_construct (fp, ctx);
 	if (!graph) {
 		gf_msg ("glfs", GF_LOG_ERROR, errno,
                         API_MSG_GRAPH_CONSTRUCT_FAILED,

@@ -881,12 +881,12 @@ glusterfs_volfile_reconfigure (int oldvollen, FILE *newvolfile_fp,
                         goto out;
                 }
 
-                oldvolfile_graph = glusterfs_graph_construct (oldvolfile_fp);
+                oldvolfile_graph = glusterfs_graph_construct (oldvolfile_fp, ctx);
                 if (!oldvolfile_graph)
                         goto out;
         }
 
-        newvolfile_graph = glusterfs_graph_construct (newvolfile_fp);
+        newvolfile_graph = glusterfs_graph_construct (newvolfile_fp, ctx);
         if (!newvolfile_graph) {
                 goto out;
         }
@@ -1033,7 +1033,7 @@ out:
 
 int
 glusterfs_graph_attach (glusterfs_graph_t *orig_graph, char *path,
-                        glusterfs_graph_t **newgraph)
+                        glusterfs_graph_t **newgraph, glusterfs_ctx_t *ctx)
 {
         xlator_t                *this   = THIS;
         FILE                    *fp;
@@ -1052,7 +1052,7 @@ glusterfs_graph_attach (glusterfs_graph_t *orig_graph, char *path,
                 return -EIO;
         }
 
-        graph = glusterfs_graph_construct (fp);
+        graph = glusterfs_graph_construct (fp, ctx);
         fclose(fp);
         if (!graph) {
                 gf_log (this->name, GF_LOG_WARNING,

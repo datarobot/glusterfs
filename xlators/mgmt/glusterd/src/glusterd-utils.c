@@ -8539,12 +8539,12 @@ glusterd_check_topology_identical (const char   *filename1,
         }
 
         /* create the graph for filename1 */
-        grph1 = glusterfs_graph_construct(fp1);
+        grph1 = glusterfs_graph_construct(fp1, NULL);
         if (grph1 == NULL)
                 goto out;
 
         /* create the graph for filename2 */
-        grph2 = glusterfs_graph_construct(fp2);
+        grph2 = glusterfs_graph_construct(fp2, NULL);
         if (grph2 == NULL)
                 goto out;
 

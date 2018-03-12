@@ -2352,7 +2352,7 @@ glusterfs_process_volfp (glusterfs_ctx_t *ctx, FILE *fp)
         xlator_t           *trav = NULL;
         int                 err = 0;
 
-        graph = glusterfs_graph_construct (fp);
+        graph = glusterfs_graph_construct (fp, ctx);
         if (!graph) {
                 gf_msg ("", GF_LOG_ERROR, 0, glusterfsd_msg_26);
                 goto out;
