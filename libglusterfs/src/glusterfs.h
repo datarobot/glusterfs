@@ -350,6 +350,7 @@ struct _cmd_args {
         char            *sock_file;
         int              no_daemon_mode;
         char            *run_id;
+        char            *xlator_dir;
         int              debug_mode;
         int              read_only;
         int              acl;

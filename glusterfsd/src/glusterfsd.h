@@ -97,6 +97,7 @@ enum argp_option_keys {
         ARGP_OOM_SCORE_ADJ_KEY            = 176,
 #endif
         ARGP_FUSE_EVENT_HISTORY_KEY       = 177,
+        ARGP_XLATORDIR_OPTION_KEY         = 178,
 };
 
 struct _gfd_vol_top_priv_t {

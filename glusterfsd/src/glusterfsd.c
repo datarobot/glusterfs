@@ -150,6 +150,8 @@ static struct argp_option gf_options[] = {
         {"volume-name", ARGP_VOLUME_NAME_KEY, "XLATOR-NAME", 0,
          "Translator name to be used for MOUNT-POINT [default: top most volume "
          "definition in VOLFILE]"},
+        {"xlator-dir", ARGP_XLATORDIR_OPTION_KEY, "XLATOR-DIR", 0,
+         "Directory to load xlators from [default: " XLATORDEFAULTDIR "]"},
         {"xlator-option", ARGP_XLATOR_OPTION_KEY,"XLATOR-NAME.OPTION=VALUE", 0,
          "Add/override an option for a translator in volume file with specified"
          " value"},
@@ -1077,6 +1079,10 @@ parse_opts (int key, char *arg, struct argp_state *state)
 
         case ARGP_VOLUME_NAME_KEY:
                 cmd_args->volume_name = gf_strdup (arg);
+                break;
+
+        case ARGP_XLATORDIR_OPTION_KEY:
+                cmd_args->xlator_dir = gf_strdup (arg);
                 break;
 
         case ARGP_XLATOR_OPTION_KEY:
