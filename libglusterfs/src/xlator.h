@@ -1034,7 +1034,7 @@ int xlator_mem_acct_init (xlator_t *xl, int num_types);
 int is_gf_log_command (xlator_t *trans, const char *name, char *value);
 int glusterd_check_log_level (const char *value);
 int xlator_volopt_dynload (char *xlator_type, void **dl_handle,
-                           volume_opt_list_t *vol_opt_handle);
+                           volume_opt_list_t *vol_opt_handle, glusterfs_ctx_t *ctx);
 enum gf_hdsk_event_notify_op {
         GF_EN_DEFRAG_STATUS,
         GF_EN_MAX,

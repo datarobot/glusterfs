@@ -1,7 +1,7 @@
 xlator_LTLIBRARIES = glupy.la
 
 # Ensure GLUSTER_PYTHON_PATH is passed to glupy.so
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 glupydir = $(xlatordir)/glupy
 
 AM_CPPFLAGS = $(PYTHONDEV_CPPFLAGS) $(GF_CPPFLAGS) \

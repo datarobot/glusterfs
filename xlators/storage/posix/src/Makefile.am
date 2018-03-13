@@ -1,6 +1,6 @@
 
 xlator_LTLIBRARIES = posix.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/storage
+xlatordir = $(libdir)/glusterfs/xlator/storage
 
 posix_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

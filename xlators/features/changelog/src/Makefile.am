@@ -1,6 +1,6 @@
 xlator_LTLIBRARIES = changelog.la
 
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 
 noinst_HEADERS = changelog-helpers.h changelog-mem-types.h changelog-rt.h \
 	changelog-rpc-common.h changelog-misc.h changelog-encoders.h \

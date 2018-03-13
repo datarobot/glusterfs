@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = write-behind.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance
+xlatordir = $(libdir)/glusterfs/xlator/performance
 
 write_behind_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

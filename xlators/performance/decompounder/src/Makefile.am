@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = decompounder.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance
+xlatordir = $(libdir)/glusterfs/xlator/performance
 
 decompounder_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

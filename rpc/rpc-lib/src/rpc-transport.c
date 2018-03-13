@@ -270,7 +270,12 @@ rpc_transport_load (glusterfs_ctx_t *ctx, dict_t *options, char *trans_name)
 		goto fail;
 	}
 
-	ret = gf_asprintf (&name, "%s/%s.so", RPC_TRANSPORTDIR, type);
+        if (ctx && ctx->cmd_args.xlator_dir) {
+                ret = gf_asprintf (&name, "%s/../rpc-transport/%s.so", ctx->cmd_args.xlator_dir, type);
+        } else {
+                ret = gf_asprintf (&name, "%s/%s.so", RPC_TRANSPORTDIR, type);
+        }
+
         if (-1 == ret) {
                 goto fail;
         }

@@ -1,4 +1,4 @@
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 
 # changetimerecorder can only get build when libgfdb is enabled
 if BUILD_GFDB

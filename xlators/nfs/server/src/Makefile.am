@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = server.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/nfs
+xlatordir = $(libdir)/glusterfs/xlator/nfs
 nfsrpclibdir = $(top_srcdir)/rpc/rpc-lib/src
 server_la_LDFLAGS = -module -avoid-version -export-symbols \
 	$(top_srcdir)/xlators/nfs/server/src/nfsserver.sym
@@ -17,7 +17,7 @@ noinst_HEADERS = nfs.h nfs-common.h nfs-fops.h nfs-inodes.h nfs-generics.h \
 	acl3.h netgroups.h exports.h mount3-auth.h auth-cache.h nfs-messages.h
 
 AM_CPPFLAGS = $(GF_CPPFLAGS) \
-	-DLIBDIR=\"$(libdir)/glusterfs/$(PACKAGE_VERSION)/auth\" \
+	-DLIBDIR=\"$(libdir)/glusterfs/auth\" \
 	-I$(top_srcdir)/libglusterfs/src -I$(top_srcdir)/api/src \
 	-I$(top_srcdir)/rpc/xdr/src/ -I$(top_builddir)/rpc/xdr/src/ \
 	-I$(nfsrpclibdir) -I$(CONTRIBDIR)/rbtree \

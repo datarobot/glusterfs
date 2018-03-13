@@ -6637,15 +6637,18 @@ _gd_get_option_type (char *key)
         volume_option_t         *opt = NULL;
         char                    *xlopt_key = NULL;
         volume_option_type_t    opt_type = GF_OPTION_TYPE_MAX;
+        xlator_t                *this = NULL;
 
         GF_ASSERT (key);
+        GF_ASSERT (THIS);
 
+        this = THIS;
         vmep = _gd_get_vmep (key);
 
         if (vmep) {
                 CDS_INIT_LIST_HEAD (&vol_opt_list.list);
                 ret = xlator_volopt_dynload (vmep->voltype, &dl_handle,
-                                             &vol_opt_list);
+                                             &vol_opt_list, this->ctx);
                 if (ret)
                         goto out;
 

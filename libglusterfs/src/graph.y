@@ -76,6 +76,7 @@ WORD: ID | STRING_TOK ;
 
 xlator_t *curr;
 glusterfs_graph_t *construct;
+glusterfs_ctx_t *global_ctx;
 
 
 static void
@@ -163,6 +164,8 @@ new_volume (char *name)
                 ret = -1;
                 goto out;
         }
+
+        curr->ctx = global_ctx;
 
         curr->options = get_new_dict ();
 
@@ -549,7 +552,7 @@ glusterfs_graph_new ()
 
 
 glusterfs_graph_t *
-glusterfs_graph_construct (FILE *fp)
+glusterfs_graph_construct (FILE *fp, glusterfs_ctx_t *ctx)
 {
         int                ret = 0;
         int                tmp_fd = -1;
@@ -557,6 +560,8 @@ glusterfs_graph_construct (FILE *fp)
         FILE              *tmp_file = NULL;
         char               template[PATH_MAX] = {0};
 	static pthread_mutex_t graph_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+        global_ctx = ctx;
 
         graph = glusterfs_graph_new ();
         if (!graph)

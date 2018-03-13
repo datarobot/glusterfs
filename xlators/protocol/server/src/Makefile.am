@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = server.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/protocol
+xlatordir = $(libdir)/glusterfs/xlator/protocol
 
 server_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 
@@ -17,7 +17,7 @@ server_ladir = $(includedir)/glusterfs/server
 
 AM_CPPFLAGS = $(GF_CPPFLAGS) -I$(top_srcdir)/libglusterfs/src \
 	-DCONFDIR=\"$(sysconfdir)/glusterfs\" \
-	-DLIBDIR=\"$(libdir)/glusterfs/$(PACKAGE_VERSION)/auth\" \
+	-DLIBDIR=\"$(libdir)/glusterfs/auth\" \
 	-I$(top_srcdir)/xlators/protocol/lib/src \
 	-I$(top_srcdir)/rpc/rpc-lib/src \
 	-I$(top_srcdir)/rpc/xdr/src -I$(top_builddir)/rpc/xdr/src

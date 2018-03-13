@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = meta.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator
+xlatordir = $(libdir)/glusterfs/xlator
 
 meta_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 

@@ -150,6 +150,8 @@ static struct argp_option gf_options[] = {
         {"volume-name", ARGP_VOLUME_NAME_KEY, "XLATOR-NAME", 0,
          "Translator name to be used for MOUNT-POINT [default: top most volume "
          "definition in VOLFILE]"},
+        {"xlator-dir", ARGP_XLATORDIR_OPTION_KEY, "XLATOR-DIR", 0,
+         "Directory to load xlators from [default: " XLATORDEFAULTDIR "]"},
         {"xlator-option", ARGP_XLATOR_OPTION_KEY,"XLATOR-NAME.OPTION=VALUE", 0,
          "Add/override an option for a translator in volume file with specified"
          " value"},
@@ -1079,6 +1081,10 @@ parse_opts (int key, char *arg, struct argp_state *state)
                 cmd_args->volume_name = gf_strdup (arg);
                 break;
 
+        case ARGP_XLATORDIR_OPTION_KEY:
+                cmd_args->xlator_dir = gf_strdup (arg);
+                break;
+
         case ARGP_XLATOR_OPTION_KEY:
                 if (gf_remember_xlator_option (arg))
                         argp_failure (state, -1, 0, "invalid xlator option  %s",
@@ -1728,8 +1734,8 @@ print_exports_file (const char *exports_file)
         void (*exp_file_print)(const struct exports_file *file) = NULL;
         void (*exp_file_deinit)(struct exports_file *ptr) = NULL;
 
-        /* XLATORDIR passed through a -D flag to GCC */
-        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDIR,
+        /* XLATORDEFAULTDIR passed through a -D flag to GCC */
+        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDEFAULTDIR,
                            "nfs");
         if (ret < 0) {
                 gf_log ("glusterfs", GF_LOG_CRITICAL, "asprintf () failed.");
@@ -1824,8 +1830,8 @@ print_netgroups_file (const char *netgroups_file)
         void         (*ng_file_print)(const struct netgroups_file *file) = NULL;
         void         (*ng_file_deinit)(struct netgroups_file *ptr) = NULL;
 
-        /* XLATORDIR passed through a -D flag to GCC */
-        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDIR,
+        /* XLATORDEFAULTDIR passed through a -D flag to GCC */
+        ret = gf_asprintf (&libpathfull, "%s/%s/server.so", XLATORDEFAULTDIR,
                         "nfs");
         if (ret < 0) {
                 gf_log ("glusterfs", GF_LOG_CRITICAL, "asprintf () failed.");
@@ -2346,7 +2352,7 @@ glusterfs_process_volfp (glusterfs_ctx_t *ctx, FILE *fp)
         xlator_t           *trav = NULL;
         int                 err = 0;
 
-        graph = glusterfs_graph_construct (fp);
+        graph = glusterfs_graph_construct (fp, ctx);
         if (!graph) {
                 gf_msg ("", GF_LOG_ERROR, 0, glusterfsd_msg_26);
                 goto out;

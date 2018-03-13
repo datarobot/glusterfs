@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = quota.la quotad.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 
 quota_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 quotad_la_LDFLAGS = -module -avoid-version -export-symbols $(top_srcdir)/xlators/features/quota/src/quotad.sym

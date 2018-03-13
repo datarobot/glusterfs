@@ -1817,7 +1817,7 @@ _glusterd_validate_quota_opts (dict_t *dict, int type, char **errstr)
         GF_ASSERT (dict);
         GF_ASSERT (this);
 
-        ret = xlator_volopt_dynload ("features/quota", &quota_xl, &opt_list);
+        ret = xlator_volopt_dynload ("features/quota", &quota_xl, &opt_list, this->ctx);
         if (ret)
                 goto out;
 

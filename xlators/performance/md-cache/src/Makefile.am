@@ -1,5 +1,5 @@
 xlator_LTLIBRARIES = md-cache.la
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance
+xlatordir = $(libdir)/glusterfs/xlator/performance
 
 md_cache_la_LDFLAGS = -module $(GF_XLATOR_DEFAULT_LDFLAGS)
 
@@ -18,12 +18,12 @@ CLEANFILES =
 
 
 stat-prefetch-compat:
-	mkdir -p $(DESTDIR)$(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance
-	rm -rf $(DESTDIR)$(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance/stat-prefetch.so
-	ln -s ./md-cache.so $(DESTDIR)$(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance/stat-prefetch.so
+	mkdir -p $(DESTDIR)$(libdir)/glusterfs/xlator/performance
+	rm -rf $(DESTDIR)$(libdir)/glusterfs/xlator/performance/stat-prefetch.so
+	ln -s ./md-cache.so $(DESTDIR)$(libdir)/glusterfs/xlator/performance/stat-prefetch.so
 
 
 install-exec-local: stat-prefetch-compat
 
 uninstall-local:
-	rm -f $(DESTDIR)$(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/performance/stat-prefetch.so
+	rm -f $(DESTDIR)$(libdir)/glusterfs/xlator/performance/stat-prefetch.so

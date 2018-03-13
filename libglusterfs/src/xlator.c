@@ -134,20 +134,30 @@ out:
 
 int
 xlator_volopt_dynload (char *xlator_type, void **dl_handle,
-                       volume_opt_list_t *opt_list)
+                       volume_opt_list_t *opt_list,
+                       glusterfs_ctx_t *ctx)
 {
         int                     ret = -1;
         char                    *name = NULL;
+        char                    *xlator_dir = NULL;
         void                    *handle = NULL;
 
         GF_VALIDATE_OR_GOTO ("xlator", xlator_type, out);
 
+        if (ctx) {
+                xlator_dir = ctx->cmd_args.xlator_dir;
+        }
+
+        if (!xlator_dir) {
+                xlator_dir = XLATORDEFAULTDIR;
+        }
+
         /* socket.so doesn't fall under the default xlator directory, hence we
          * need this check */
         if (!strstr(xlator_type, "rpc-transport"))
-                ret = gf_asprintf (&name, "%s/%s.so", XLATORDIR, xlator_type);
+                ret = gf_asprintf (&name, "%s/%s.so", xlator_dir, xlator_type);
         else
-                ret = gf_asprintf (&name, "%s/%s.so", XLATORPARENTDIR, xlator_type);
+                ret = gf_asprintf (&name, "%s/../%s.so", xlator_dir, xlator_type);
         if (-1 == ret) {
                 goto out;
         }
@@ -190,15 +200,26 @@ xlator_dynload (xlator_t *xl)
 {
         int                ret = -1;
         char              *name = NULL;
+        char              *xlator_dir = NULL;
         void              *handle = NULL;
         volume_opt_list_t *vol_opt = NULL;
         class_methods_t   *vtbl = NULL;
+        glusterfs_ctx_t   *ctx = NULL;
 
         GF_VALIDATE_OR_GOTO ("xlator", xl, out);
 
         INIT_LIST_HEAD (&xl->volume_options);
 
-        ret = gf_asprintf (&name, "%s/%s.so", XLATORDIR, xl->type);
+        ctx = xl->ctx;
+        if (ctx) {
+                xlator_dir = ctx->cmd_args.xlator_dir;
+        }
+
+        if (!xlator_dir) {
+                xlator_dir = XLATORDEFAULTDIR;
+        }
+
+        ret = gf_asprintf (&name, "%s/%s.so", xlator_dir, xl->type);
         if (-1 == ret) {
                 goto out;
         }

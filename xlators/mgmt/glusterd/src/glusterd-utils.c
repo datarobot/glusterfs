@@ -8539,12 +8539,12 @@ glusterd_check_topology_identical (const char   *filename1,
         }
 
         /* create the graph for filename1 */
-        grph1 = glusterfs_graph_construct(fp1);
+        grph1 = glusterfs_graph_construct(fp1, NULL);
         if (grph1 == NULL)
                 goto out;
 
         /* create the graph for filename2 */
-        grph2 = glusterfs_graph_construct(fp2);
+        grph2 = glusterfs_graph_construct(fp2, NULL);
         if (grph2 == NULL)
                 goto out;
 
@@ -11974,7 +11974,7 @@ glusterd_get_value_for_vme_entry (struct volopt_map_entry *vme, char **def_val)
                 goto out;
         }
 
-        ret = xlator_volopt_dynload (vme->voltype, &dl_handle, &vol_opt_handle);
+        ret = xlator_volopt_dynload (vme->voltype, &dl_handle, &vol_opt_handle, this->ctx);
         if (ret) {
                 gf_msg (this->name, GF_LOG_ERROR, 0,
                         GD_MSG_XLATOR_VOLOPT_DYNLOAD_ERROR,
@@ -12362,7 +12362,8 @@ glusterd_get_volopt_content (dict_t * ctx, gf_boolean_t xml_out)
 
                         ret = xlator_volopt_dynload (vme->voltype,
                                                      &dl_handle,
-                                                     &vol_opt_handle);
+                                                     &vol_opt_handle,
+                                                     ctx);
 
                         if (ret) {
                                 gf_msg_debug ("glusterd", 0,

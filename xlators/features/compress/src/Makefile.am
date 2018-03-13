@@ -1,6 +1,6 @@
 xlator_LTLIBRARIES = cdc.la
 
-xlatordir = $(libdir)/glusterfs/$(PACKAGE_VERSION)/xlator/features
+xlatordir = $(libdir)/glusterfs/xlator/features
 
 noinst_HEADERS = cdc.h cdc-mem-types.h
 
