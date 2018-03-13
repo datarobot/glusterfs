@@ -1386,6 +1386,7 @@ init (xlator_t *this)
         struct stat        buf                        = {0,};
         char               storedir[PATH_MAX]         = {0,};
         char               workdir[PATH_MAX]          = {0,};
+        char               logdir[PATH_MAX]           = {0,};
         char               rundir[PATH_MAX]           = {0,};
         char               cmd_log_filename[PATH_MAX] = {0,};
         char              *mountbroker_root           = NULL;
@@ -1436,6 +1437,14 @@ init (xlator_t *this)
                 strncpy (workdir, GLUSTERD_DEFAULT_WORKDIR, PATH_MAX);
         } else {
                 strncpy (workdir, dir_data->data, PATH_MAX);
+        }
+
+        dir_data = dict_get (this->options, "log-directory");
+        if (!dir_data) {
+                //Use default log dir
+                strncpy (logdir, DEFAULT_LOG_FILE_DIRECTORY, PATH_MAX);
+        } else {
+                strncpy (logdir, dir_data->data, PATH_MAX);
         }
 
         ret = sys_stat (workdir, &buf);
@@ -1552,8 +1561,16 @@ init (xlator_t *this)
                 exit (1);
         }
 
+        ret = mkdir_p (logdir, 0777, _gf_true);
+        if (ret) {
+                gf_msg (this->name, GF_LOG_CRITICAL, 0,
+                        GD_MSG_CREATE_DIR_FAILED, "Unable to create "
+                        "log directory %s: %s", logdir, strerror (errno));
+                exit (1);
+        }
+
         snprintf (cmd_log_filename, PATH_MAX, "%s/cmd_history.log",
-                  DEFAULT_LOG_FILE_DIRECTORY);
+                  logdir);
         ret = gf_cmd_log_init (cmd_log_filename);
 
         if (ret == -1) {
@@ -1612,7 +1629,7 @@ init (xlator_t *this)
                 exit (1);
         }
 
-        snprintf (storedir, PATH_MAX, "%s/bricks", DEFAULT_LOG_FILE_DIRECTORY);
+        snprintf (storedir, PATH_MAX, "%s/bricks", logdir);
         ret = sys_mkdir (storedir, 0777);
         if ((-1 == ret) && (errno != EEXIST)) {
                 gf_msg (this->name, GF_LOG_CRITICAL, errno,
@@ -2034,6 +2051,12 @@ struct xlator_dumpops dumpops = {
 
 struct volume_options options[] = {
         { .key   = {"working-directory"},
+          .type  = GF_OPTION_TYPE_PATH,
+        },
+        { .key   = {"run-directory"},
+          .type  = GF_OPTION_TYPE_PATH,
+        },
+        { .key   = {"log-directory"},
           .type  = GF_OPTION_TYPE_PATH,
         },
         { .key   = {"transport-type"},
