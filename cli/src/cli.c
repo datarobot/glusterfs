@@ -408,6 +408,12 @@ cli_opt_parse (char *opt, struct cli_state *state)
                 return 0;
         }
 
+        oarg = strtail (opt, "xlator-dir=");
+        if (oarg) {
+                state->ctx->cmd_args.xlator_dir = oarg;
+                return 0;
+        }
+
         oarg = strtail (opt, "secure-mgmt=");
         if (oarg) {
                 if (gf_string2boolean(oarg,&secure_mgmt_tmp) == 0) {
