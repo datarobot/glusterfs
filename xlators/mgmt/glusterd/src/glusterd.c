@@ -1247,41 +1247,6 @@ out:
 }
 
 static int
-glusterd_find_correct_var_run_dir (xlator_t *this, char *var_run_dir)
-{
-        int             ret = -1;
-        struct stat     buf = {0,};
-
-        GF_VALIDATE_OR_GOTO ("glusterd", this, out);
-        GF_VALIDATE_OR_GOTO (this->name, var_run_dir, out);
-
-        /* /var/run is normally a symbolic link to /run dir, which
-         * creates problems as the entry point in the mtab for the mount point
-         * and glusterd maintained entry point will be different. Therefore
-         * identify the correct run dir and use it
-         */
-        ret = sys_lstat (GLUSTERD_VAR_RUN_DIR, &buf);
-        if (ret != 0) {
-                gf_msg (this->name, GF_LOG_ERROR, errno,
-                        GD_MSG_FILE_OP_FAILED,
-                        "stat fails on %s, exiting. (errno = %d)",
-                        GLUSTERD_VAR_RUN_DIR, errno);
-                goto out;
-        }
-
-        /* If /var/run is symlink then use /run dir */
-        if (S_ISLNK (buf.st_mode)) {
-                strcpy (var_run_dir, GLUSTERD_RUN_DIR);
-        } else {
-                strcpy (var_run_dir, GLUSTERD_VAR_RUN_DIR);
-        }
-
-        ret = 0;
-out:
-        return ret;
-}
-
-static int
 glusterd_init_var_run_dirs (xlator_t *this, char *var_run_dir,
                             char *dir_to_be_created)
 {
@@ -1428,7 +1393,7 @@ init (xlator_t *this)
         int                total_transport            = 0;
         char              *valgrind_str               = NULL;
         char              *transport_type             = NULL;
-        char               var_run_dir[PATH_MAX]      = {0,};
+        char               snap_link_dir[PATH_MAX]  = {0,};
         int32_t            workers                    = 0;
         gf_boolean_t       upgrade                    = _gf_false;
         gf_boolean_t       downgrade                  = _gf_false;
@@ -1513,16 +1478,11 @@ init (xlator_t *this)
                 GD_MSG_CURR_WORK_DIR_INFO, "Using %s as pid file working "
                 "directory", rundir);
 
-        ret = glusterd_find_correct_var_run_dir (this, var_run_dir);
-        if (ret) {
-                gf_msg (this->name, GF_LOG_CRITICAL, 0,
-                        GD_MSG_VAR_RUN_DIR_FIND_FAIL, "Unable to find "
-                        "the correct var run dir");
-                exit (1);
-        }
+        snprintf (snap_link_dir, sizeof(snap_link_dir), "%s%s",
+                  rundir, GLUSTERD_DEFAULT_SNAPS_BRICK_DIR);
 
-        ret = glusterd_init_var_run_dirs (this, var_run_dir,
-                                      GLUSTERD_DEFAULT_SNAPS_BRICK_DIR);
+        ret = glusterd_init_var_run_dirs (this, rundir,
+                                          GLUSTERD_DEFAULT_SNAPS_BRICK_DIR);
 
         if (ret) {
                 gf_msg (this->name, GF_LOG_CRITICAL, 0,
@@ -1531,8 +1491,12 @@ init (xlator_t *this)
                 exit (1);
         }
 
-        snprintf (snap_mount_dir, sizeof(snap_mount_dir), "%s%s",
-                  var_run_dir, GLUSTERD_DEFAULT_SNAPS_BRICK_DIR);
+        if (!realpath(snap_link_dir, snap_mount_dir)) {
+                gf_msg (this->name, GF_LOG_CRITICAL, 0,
+                        GD_MSG_VAR_RUN_DIR_FIND_FAIL, "Unable to resolve "
+                        "snap mount dir: %s", strerror (errno));
+                exit (1);
+        }
 
         ret = mkdir_p (GLUSTER_SHARED_STORAGE_BRICK_DIR, 0777,
                        _gf_true);
