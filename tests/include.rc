@@ -28,7 +28,7 @@ while true; do
                 break
         fi
         new_dir=$(dirname $env_dir)
-        if [ x"$new_dir" = x"$old_dir" ]; then
+        if [ x"$new_dir" = x"$env_dir" ]; then
                 ENV_RC="/not/found"
                 break
         fi
