@@ -81,6 +81,12 @@ NetBSD)
         ;;
 esac 
 
+if [ -f "/.dockerenv" ]; then
+        echo "Skip LVM tests inside of Docker" >&2
+        SKIP_TESTS
+        exit 0
+fi
+
 TEST glusterd
 TEST pidof glusterd
 configure
